@@ -1,4 +1,4 @@
-# weightlifting_app
+# strength_training_app
 an app that writes weightlifting programs based on your strength training goals
 
 ## To Run Locally
