@@ -4,6 +4,6 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path("weightlifting/", include("weightlifting.urls")),
+    path("", include("weightlifting.urls")),
     path("admin/", admin.site.urls),
 ]
