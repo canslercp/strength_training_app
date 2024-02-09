@@ -9,7 +9,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
 
-class SurveyResponse(models.Model):
+class Program(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     focus = models.CharField(max_length=40)
     competition = models.BooleanField()
@@ -18,6 +18,6 @@ class SurveyResponse(models.Model):
     emphasis = models.CharField(max_length=100)
 
 class Competition(models.Model):
-    startDate = models.DateField()
+    compName = models.CharField(max_length=40)
+    compDate = models.DateField()
     priority = models.IntegerField()
-    name = models.CharField(max_length=40)
