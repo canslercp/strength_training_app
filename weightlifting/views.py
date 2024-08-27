@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-# from .models import program
-# from .serializers import ProgramSerializer
+from .models import Program
+from .serializers import ProgramSerializer
 
 # Create your views here.
 
-@api_view(['GET'])
+@api_view(['GET']) # could add POST, PUT, DELETE here as well
 def getRoutes(request):
 
     routes = [
@@ -42,3 +42,15 @@ def getRoutes(request):
         }
     ]
     return Response(routes)
+
+@api_view(['GET'])
+def getPrograms(request):
+    programs = Program.objects.all()
+    serializer = ProgramSerializer(programs, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getProgram(request, pk):
+    program = Program.objects.get(id=pk)
+    serializer = ProgramSerializer(program, many=False)
+    return Response(serializer.data)
