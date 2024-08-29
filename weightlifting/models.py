@@ -21,3 +21,17 @@ class Competition(models.Model):
     compName = models.CharField(max_length=40)
     compDate = models.DateField()
     priority = models.IntegerField()
+
+from django.db import models, connection
+
+# # Your models here...
+
+# def check_table_exists(weightlifting_program):
+#     with connection.cursor() as cursor:
+#         cursor.execute("""
+#             SELECT name FROM sqlite_master WHERE type='table' AND name=%s
+#         """, [weightlifting_program])
+#         return cursor.fetchone() is not None
+
+# # Usage
+# print(check_table_exists('weightlifting_program'))
