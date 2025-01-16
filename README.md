@@ -26,3 +26,8 @@ run the following commands from the root directory of dial-in:
   ```
   python manage.py runserver
   ```
+
+* Django Admin:
+  ```
+  http://127.0.0.1:8000/admin/
+  ```
