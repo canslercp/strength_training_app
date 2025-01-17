@@ -12,7 +12,7 @@ class User(models.Model):
 class Competition(models.Model):
     compName = models.CharField(max_length=40)
     compDate = models.DateField()
-    priority = models.IntegerField()
+    priority = models.IntegerField(max_length=10)
 
 class Program(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -21,6 +21,12 @@ class Program(models.Model):
     startDate = models.DateField()
     duration = models.IntegerField()
     emphasis = models.CharField(max_length=100)
+
+    def calculate_duration_in_weeks(self):
+        if self.competition and self.startDate:
+            delta = self.competition.compDate - self.startDate
+            return delta.days // 7
+        return None
 
 from django.db import models, connection
 
