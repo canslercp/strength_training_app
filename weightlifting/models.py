@@ -9,18 +9,18 @@ class User(models.Model):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
 
-class Program(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    focus = models.CharField(max_length=40)
-    competition = models.BooleanField()
-    startDate = models.DateField()
-    duration = models.IntegerField()
-    emphasis = models.CharField(max_length=100)
-
 class Competition(models.Model):
     compName = models.CharField(max_length=40)
     compDate = models.DateField()
     priority = models.IntegerField()
+
+class Program(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    focus = models.CharField(max_length=40)
+    competition = models.ForeignKey(Competition, on_delete=models.CASCADE, null=True)
+    startDate = models.DateField()
+    duration = models.IntegerField()
+    emphasis = models.CharField(max_length=100)
 
 from django.db import models, connection
 
