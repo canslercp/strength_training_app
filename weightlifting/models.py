@@ -12,7 +12,7 @@ class User(models.Model):
 class Competition(models.Model):
     compName = models.CharField(max_length=40)
     compDate = models.DateField()
-    priority = models.IntegerField(max_length=10)
+    priority = models.IntegerField()
 
 class Program(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

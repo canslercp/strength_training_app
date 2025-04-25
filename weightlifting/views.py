@@ -54,3 +54,14 @@ def getProgram(request, pk):
     program = Program.objects.get(id=pk)
     serializer = ProgramSerializer(program, many=False)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateProgram(request, pk):
+    data = request.data
+    program = Program.objects.get(id=pk)
+    serializer = ProgramSerializer(instance=program, data=data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
