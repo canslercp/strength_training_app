@@ -55,6 +55,19 @@ def getProgram(request, pk):
     serializer = ProgramSerializer(program, many=False)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def createProgram(request):
+    data = request.data
+    program = Program.objects.create(
+        focus=data['focus'],
+        competition_id=data.get('competition'),  # Optional field
+        startDate=data['startDate'],
+        duration=data['duration'],
+        emphasis=data['emphasis']
+    )
+    serializer = ProgramSerializer(program, many=False)
+    return Response(serializer.data)
+
 @api_view(['PUT'])
 def updateProgram(request, pk):
     data = request.data
