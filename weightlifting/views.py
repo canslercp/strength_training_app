@@ -65,3 +65,10 @@ def updateProgram(request, pk):
         serializer.save()
 
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def deleteProgram(request, pk):
+    program = Program.objects.get(id=pk)
+    program.delete()
+
+    return Response('Program was deleted!')
