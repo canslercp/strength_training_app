@@ -17,15 +17,14 @@ class Competition(models.Model):
 class Program(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     focus = models.CharField(max_length=40)
-    competition = models.ForeignKey(Competition, on_delete=models.CASCADE, null=True)
+    competition = models.BooleanField(default=False)  # Changed to boolean
     startDate = models.DateField()
     duration = models.IntegerField()
     emphasis = models.CharField(max_length=100)
 
     def calculate_duration_in_weeks(self):
-        if self.competition and self.startDate:
-            delta = self.competition.compDate - self.startDate
-            return delta.days // 7
+        if self.startDate and self.duration:
+            return self.duration // 7
         return None
 
 from django.db import models, connection

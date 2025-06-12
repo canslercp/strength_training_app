@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Program
+from .models import Program, Competition
 from .serializers import ProgramSerializer
 
 # Create your views here.
@@ -58,13 +58,27 @@ def getProgram(request, pk):
 @api_view(['POST'])
 def createProgram(request):
     data = request.data
+    competition = None
+
+    if data['competition']:  # If competition is true, create a Competition instance
+        competition = Competition.objects.create(
+            compName=data['compName'],
+            compDate=data['compDate'],
+            priority=data['priority']
+        )
+
     program = Program.objects.create(
         focus=data['focus'],
-        competition_id=data.get('competition'),  # Optional field
+        competition=data['competition'],  # Boolean field
         startDate=data['startDate'],
         duration=data['duration'],
         emphasis=data['emphasis']
     )
+
+    if competition:
+        program.competition = competition
+        program.save()
+
     serializer = ProgramSerializer(program, many=False)
     return Response(serializer.data)
 
