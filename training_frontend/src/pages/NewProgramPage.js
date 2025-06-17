@@ -39,7 +39,7 @@ const NewProgramPage = () => {
         e.preventDefault();
         const finalDuration = formData.compDate ? null : (formData.duration === 'Custom' ? formData.customDuration : formData.duration);
         try {
-            const response = await axios.post('/api/programs/create/', { ...formData, duration: finalDuration });
+            const response = await axios.post('/weightlifting/programs/create/', { ...formData, duration: finalDuration });
             alert('Program created successfully!');
             console.log(response.data);
         } catch (error) {

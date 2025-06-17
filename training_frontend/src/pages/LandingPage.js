@@ -11,7 +11,7 @@ const LandingPage = () => {
     }, [])
 
     let getPrograms = async () => {
-        let response = await fetch('http://127.0.0.1:8000/weightlifting/programs/')
+        let response = await fetch('/weightlifting/programs/')
         let data = await response.json()
         console.log('data: ', data)
         setPrograms(data)
