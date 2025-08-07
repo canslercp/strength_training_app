@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from'react'
 import ListItem from '../components/ListItem'
-import AddProgram from '../components/AddProgram'
 
 const LandingPage = () => {
 
@@ -11,10 +10,16 @@ const LandingPage = () => {
     }, [])
 
     let getPrograms = async () => {
-        let response = await fetch('/weightlifting/programs/')
-        let data = await response.json()
-        console.log('data: ', data)
-        setPrograms(data)
+        try {
+            console.log('Fetching programs...')
+            let response = await fetch('/api/programs/')
+            console.log('Response status:', response.status)
+            let data = await response.json()
+            console.log('data: ', data)
+            setPrograms(data)
+        } catch (error) {
+            console.error('Error fetching programs:', error)
+        }
     }
 
 
@@ -22,12 +27,16 @@ const LandingPage = () => {
     return (
         <div>
             <h3>Programs</h3>
+            <p>LandingPage is rendering!</p>
             <ul>
-                {programs.map((program, index) => (
-                    <ListItem key={index} program={program} />
-                ))}
+                {programs.length > 0 ? (
+                    programs.map((program, index) => (
+                        <ListItem key={index} program={program} />
+                    ))
+                ) : (
+                    <p>No programs available or still loading...</p>
+                )}
             </ul>
-            <AddProgram />
         </div>
     )
 }

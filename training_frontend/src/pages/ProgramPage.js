@@ -11,14 +11,22 @@ const ProgramPage = () => {
     }, [programId])
 
     let getProgram = async () => {
-        let response = await fetch(`/weightlifting/programs/${programId}/`)
-        let data = await response.json()
-        setProgram(data)
+        try {
+            console.log('Fetching program with ID:', programId)
+            let response = await fetch(`/api/programs/${programId}/`)
+            console.log('Response status:', response.status)
+            let data = await response.json()
+            console.log('Program data:', data)
+            setProgram(data)
+        } catch (error) {
+            console.error('Error fetching program:', error)
+        }
     }
 
     return (
         <div>
-            {program && (
+            <p>ProgramPage is rendering for ID: {programId}</p>
+            {program ? (
                 <>
                     <h3>{program.focus}</h3>
                     <ul>
@@ -26,6 +34,8 @@ const ProgramPage = () => {
                         <li>{program.duration} weeks</li>
                     </ul>
                 </>
+            ) : (
+                <p>Loading program or program not found...</p>
             )}
         </div>
     );
