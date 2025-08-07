@@ -1,12 +1,12 @@
 import React from 'react'
-import { link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ReactComponent as AddIcon } from '../assets/add.svg'
 
 const AddProgram = () => {
     return (
-        <link to="/program/new">
+        <Link to="/programs/new">
             <AddIcon/>
-        </link>
+        </Link>
     )
 }
 export default AddProgram
